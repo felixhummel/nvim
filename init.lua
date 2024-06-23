@@ -7,7 +7,9 @@ vim.opt.mouse = ''
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Set to true if you have a Nerd Font installed and selected in the terminal
+vim.keymap.set('n', '<C-p>', '"+p', { desc = 'paste from system clipboard' })
+vim.keymap.set({ 'n', 'v' }, '<C-y>', '"+y', { desc = 'copy to system clipboard' })
+
 vim.g.have_nerd_font = true
 
 vim.opt.number = false
@@ -393,6 +395,14 @@ require('lazy').setup({
         mode = '',
         desc = '[F]ormat buffer',
       },
+      {
+        '<M-S-l>', -- muscle memory (pycharm)
+        function()
+          require('conform').format { async = true, lsp_fallback = true }
+        end,
+        mode = '',
+        desc = '[F]ormat buffer',
+      },
     },
     opts = {
       notify_on_error = false,
@@ -447,10 +457,6 @@ require('lazy').setup({
         },
       },
       'saadparwaiz1/cmp_luasnip',
-
-      -- Adds other completion capabilities.
-      --  nvim-cmp does not ship with all sources by default. They are split
-      --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
@@ -503,6 +509,28 @@ require('lazy').setup({
           { name = 'path' },
         },
       }
+
+      cmp.setup.cmdline('/', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = 'buffer' },
+        },
+      })
+
+      -- `:` cmdline setup.
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = 'path' },
+        }, {
+          {
+            name = 'cmdline',
+            option = {
+              ignore_cmds = { 'Man', '!' },
+            },
+          },
+        }),
+      })
     end,
   },
 
