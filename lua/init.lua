@@ -9,16 +9,15 @@ vim.opt.wildmode = 'longest:full'
 -- used later to configure cmp too
 local completeopt = 'longest,menuone,noselect'
 vim.opt.completeopt = completeopt
+vim.opt.mouse = '' -- disable mouse
 
--- disable mouse
-vim.opt.mouse = ''
-
--- Set <space> as the leader key
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.keymap.set('n', '<C-p>', '"+p', { desc = 'paste from system clipboard' })
-vim.keymap.set({ 'n', 'v' }, '<C-y>', '"+y', { desc = 'copy to system clipboard' })
+require 'bindings'
+-- nvim-tree wants us to disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 vim.g.have_nerd_font = true
 
@@ -27,12 +26,6 @@ vim.opt.number = false
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
--- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
--- vim.opt.clipboard = 'unnamedplus'
-
--- Enable break indent
 vim.opt.breakindent = true
 
 -- Save undo history
@@ -456,7 +449,7 @@ require('lazy').setup({
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
-      -- 'hrsh7th/cmp-cmdline',
+      'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-emoji',
       'PhilippFeO/cmp-help-tags',
     },
@@ -544,7 +537,8 @@ require('lazy').setup({
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
-      -- Better Around/Inside textobjects
+      -- list of textobjects
+      -- :help MiniAi-textobject-builtin
       --
       -- Examples:
       --  - va)  - [V]isually select [A]round [)]paren
@@ -559,23 +553,7 @@ require('lazy').setup({
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
 
-      -- Simple and easy statusline.
-      --  You could remove this setup call if you don't like it,
-      --  and try some other statusline plugin
-      local statusline = require 'mini.statusline'
-      -- set use_icons to true if you have a Nerd Font
-      statusline.setup { use_icons = vim.g.have_nerd_font }
-
-      -- You can configure sections in the statusline by overriding their
-      -- default behavior. For example, here we set the section for
-      -- cursor location to LINE:COLUMN
-      ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return '%2l:%-2v'
-      end
-
-      -- ... and there is more!
-      --  Check out: https://github.com/echasnovski/mini.nvim
+      require 'config.statusline'
     end,
   },
   { -- Highlight, edit, and navigate code
@@ -595,20 +573,45 @@ require('lazy').setup({
       indent = { enable = true, disable = { 'ruby' } },
     },
     config = function(_, opts)
-      -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-
-      -- Prefer git instead of curl in order to improve connectivity in some environments
-      require('nvim-treesitter.install').prefer_git = true
-      ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup(opts)
 
-      -- There are additional nvim-treesitter modules that you can use to interact
-      -- with nvim-treesitter. You should go explore a few and see what interests you:
+      -- maybe
       --
-      --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
-      --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
-      --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+      -- - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
+      -- - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     end,
+  },
+  {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+    },
+    setup = {
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true,
+          keymaps = {
+            ['ab'] = { query = '@block.outer', desc = 'block.outer' },
+            ['ib'] = { query = '@block.inner', desc = 'block.inner' },
+            ['af'] = { query = '@function.outer', desc = 'function.outer' },
+            ['if'] = { query = '@function.inner', desc = 'function.inner' },
+            ['ac'] = { query = '@class.outer', desc = 'class.outer' },
+            ['ic'] = { query = '@class.inner', desc = 'class.inner' },
+            ['as'] = { query = '@scope', query_group = 'locals', desc = 'Select language scope' },
+          },
+          selection_modes = {
+            -- 'v' = charwise, 'V' = linewise, '<c-v>' = blockwise
+            ['@parameter.outer'] = 'v',
+            ['@block.outer'] = 'V',
+            ['@block.inner'] = 'V',
+            ['@function.outer'] = 'V',
+            ['@function.inner'] = 'V',
+            ['@class.outer'] = '<c-v>',
+          },
+        },
+      },
+    },
   },
 
   { -- remember cursor position
@@ -623,6 +626,10 @@ require('lazy').setup({
   },
 
   require 'plugins.nvim-tree',
+  {
+    'declancm/maximize.nvim',
+    config = true,
+  },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
