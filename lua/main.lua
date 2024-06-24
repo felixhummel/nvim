@@ -1,8 +1,8 @@
 -- based on
 -- https://github.com/nvim-lua/kickstart.nvim
 
--- complete only to certainty, e.g.
--- :e ~/.c<TAB> remains at ~/.c and shows preview with ~/.cache, ~/.config, ...
+-- only complete things you are certain about, e.g.
+-- `:e ~/.c<TAB>` remains at ~/.c and shows preview with ~/.cache, ~/.config, ...
 -- https://www.reddit.com/r/neovim/comments/10rsl92/comment/j6xc38q/
 vim.opt.wildmode = 'longest:full'
 
@@ -11,10 +11,24 @@ local completeopt = 'longest,menuone,noselect'
 vim.opt.completeopt = completeopt
 vim.opt.mouse = '' -- disable mouse
 
+vim.opt.laststatus = 2
+vim.opt.tabpagemax = 50
+vim.opt.iskeyword:append '-'
+
+vim.cmd [[
+set iskeyword+=-
+set undofile
+set undodir=~/.vim/undodir
+set complete=.,w,b,u,t
+set noswapfile  " disable swapfiles
+
+autocmd BufWritePost ~/LOG/*.md silent execute '!cd $(dirname %) && git status -s >/dev/null && git add $(basename %) && git commit -qm log -- $(basename %) >/dev/null'
+]]
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-
 require 'bindings'
+
 -- nvim-tree wants us to disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -74,6 +88,7 @@ local _lazy_setup = {
   'https://gitlab.com/mcepl/vim-fzfspell/', -- spelling with fzf
   require 'plugins.nvim-tree',
   { 'declancm/maximize.nvim', config = true },
+  require 'plugins.clipboard-images',
 }
 local _lazy_config = require 'config.lazy'
 require('lazy').setup(_lazy_setup, _lazy_config)
