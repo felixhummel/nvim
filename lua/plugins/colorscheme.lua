@@ -5,4 +5,7 @@ return {
     vim.cmd.colorscheme 'carbonfox'
     -- vim.cmd.hi 'Comment gui=none'
   end,
+  config = function()
+    require 'config.colorscheme'
+  end,
 }
