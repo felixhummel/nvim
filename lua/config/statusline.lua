@@ -1,5 +1,15 @@
 local statusline = require 'mini.statusline'
+
+local _getfilename = function()
+  -- :help errorformat
+  return '%f%m%r'
+end
+
 statusline.setup {
+  content = {
+    active = _getfilename,
+    inactive = _getfilename,
+  },
   use_icons = vim.g.have_nerd_font,
 }
 
@@ -7,11 +17,4 @@ statusline.setup {
 ---@diagnostic disable-next-line: duplicate-set-field
 statusline.section_location = function()
   return '%2l:%-2v'
-end
-
----@diagnostic disable-next-line: duplicate-set-field,unused-local
-statusline.section_filename = function(args)
-  -- File name with 'truncate', 'modified', 'readonly' flags
-  -- Use relative path if truncated
-  return '%f%m%r'
 end
