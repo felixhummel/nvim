@@ -86,9 +86,12 @@ local _lazy_setup = {
   'mrcjkb/nvim-lastplace', -- remember cursor position
   'junegunn/fzf.vim', -- old-school fzf
   'https://gitlab.com/mcepl/vim-fzfspell/', -- spelling with fzf
+  -- TODO: https://github.com/stevearc/oil.nvim anyways, but may be an alternative
   require 'plugins.nvim-tree',
   { 'declancm/maximize.nvim', config = true },
   require 'plugins.clipboard-images',
+  -- ausprobieren
+  -- https://github.com/AckslD/nvim-neoclip.lua?tab=readme-ov-file
 }
 local _lazy_config = require 'config.lazy'
 require('lazy').setup(_lazy_setup, _lazy_config)
