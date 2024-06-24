@@ -1,4 +1,14 @@
+-- based on
 -- https://github.com/nvim-lua/kickstart.nvim
+
+-- complete only to certainty, e.g.
+-- :e ~/.c<TAB> remains at ~/.c and shows preview with ~/.cache, ~/.config, ...
+-- https://www.reddit.com/r/neovim/comments/10rsl92/comment/j6xc38q/
+vim.opt.wildmode = 'longest:full'
+
+-- used later to configure cmp too
+local completeopt = 'longest,menuone,noselect'
+vim.opt.completeopt = completeopt
 
 -- disable mouse
 vim.opt.mouse = ''
@@ -252,10 +262,9 @@ require('lazy').setup({
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
-          -- Jump to the definition of the word under your cursor.
-          --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
           map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          map([[\v]], require('telescope.builtin').lsp_definitions, '[G]oto [V]split Definition')
 
           -- Find references for the word under your cursor.
           map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
@@ -460,7 +469,8 @@ require('lazy').setup({
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
-      'hrsh7th/cmp-cmdline',
+      -- 'hrsh7th/cmp-cmdline',
+      'hrsh7th/cmp-emoji',
     },
     config = function()
       -- See `:help cmp`
@@ -474,33 +484,16 @@ require('lazy').setup({
             luasnip.lsp_expand(args.body)
           end,
         },
-        completion = { completeopt = 'longest,menuone' },
+        completion = { completeopt = completeopt },
+        preselect = cmp.PreselectMode.None,
 
         mapping = cmp.mapping.preset.insert {
           ['<C-n>'] = cmp.mapping.select_next_item(),
           ['<C-p>'] = cmp.mapping.select_prev_item(),
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<Tab>'] = cmp.mapping.confirm { select = true },
+          ['<CR>'] = cmp.mapping.confirm { select = true },
           ['<C-Space>'] = cmp.mapping.complete {},
-          -- Think of <c-l> as moving to the right of your snippet expansion.
-          --  So if you have a snippet that's like:
-          --  function $name($args)
-          --    $body
-          --  end
-          --
-          -- <c-l> will move you to the right of each of the expansion locations.
-          -- <c-h> is similar, except moving you backwards.
-          ['<C-l>'] = cmp.mapping(function()
-            if luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
-            end
-          end, { 'i', 's' }),
-          ['<C-h>'] = cmp.mapping(function()
-            if luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
-            end
-          end, { 'i', 's' }),
         },
         sources = {
           { name = 'buffer' },
@@ -527,6 +520,7 @@ require('lazy').setup({
             name = 'cmdline',
             option = {
               ignore_cmds = { 'Man', '!' },
+              treat_trailing_slash = false,
             },
           },
         }),
@@ -628,15 +622,6 @@ require('lazy').setup({
     'https://gitlab.com/mcepl/vim-fzfspell/',
   },
 
-  -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
-  -- init.lua. If you want these files, they are in the repository, so you can just download them and
-  -- place them in the correct locations.
-
-  -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
-  --
-  --  Here are some example plugins that I've included in the Kickstart repository.
-  --  Uncomment any of the lines below to enable them (you will need to restart nvim).
-  --
   -- require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
@@ -646,8 +631,6 @@ require('lazy').setup({
 
   { -- nerdtree alternative
     'nvim-tree/nvim-tree.lua',
-
-    --
     config = function()
       local nvim_tree_lib = require 'nvim-tree.lib'
       local telescope = require 'telescope.builtin'
