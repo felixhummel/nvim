@@ -1,5 +1,4 @@
--- based on
--- https://github.com/nvim-lua/kickstart.nvim
+-- based on https://github.com/nvim-lua/kickstart.nvim
 
 -- only complete things you are certain about, e.g.
 -- `:e ~/.c<TAB>` remains at ~/.c and shows preview with ~/.cache, ~/.config, ...
