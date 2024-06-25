@@ -45,13 +45,13 @@ return { -- Autocompletion
           luasnip.lsp_expand(args.body)
         end,
       },
-      completion = { completeopt = completeopt },
+      completion = { completeopt = 'longest,menuone,noselect' },
       preselect = cmp.PreselectMode.None,
 
       mapping = cmp.mapping.preset.insert {
         -- bash-like
         ['<Tab>'] = {
-          c = function()
+          i = function()
             if cmp.visible() then
               cmp.select_next_item()
             else
@@ -63,7 +63,8 @@ return { -- Autocompletion
         ['<C-p>'] = cmp.mapping.select_prev_item(),
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<CR>'] = cmp.mapping.confirm { select = true },
+        -- https://www.reddit.com/r/neovim/comments/xrbdny/how_to_select_from_nvimcmp_only_after_having/
+        ['<CR>'] = cmp.mapping.confirm { select = false },
         ['<C-Space>'] = cmp.mapping.complete {},
       },
       sources = {

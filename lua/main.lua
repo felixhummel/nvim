@@ -5,9 +5,8 @@
 -- https://www.reddit.com/r/neovim/comments/10rsl92/comment/j6xc38q/
 vim.opt.wildmode = 'longest:full'
 
--- used later to configure cmp too
-local completeopt = 'longest,menuone,noselect'
-vim.opt.completeopt = completeopt
+-- see plugins/completion.lua too
+vim.opt.completeopt = 'longest,menuone,noselect'
 vim.opt.mouse = '' -- disable mouse
 
 vim.opt.laststatus = 2
