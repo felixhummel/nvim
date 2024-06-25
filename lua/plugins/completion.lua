@@ -32,6 +32,7 @@ return { -- Autocompletion
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-emoji',
+    'uga-rosa/cmp-dictionary',
   },
   config = function()
     -- See `:help cmp`
@@ -60,7 +61,9 @@ return { -- Autocompletion
           end,
         },
         ['<C-n>'] = cmp.mapping.select_next_item(),
+        ['<Down>'] = cmp.mapping.select_next_item(),
         ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<Up>'] = cmp.mapping.select_next_item(),
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         -- https://www.reddit.com/r/neovim/comments/xrbdny/how_to_select_from_nvimcmp_only_after_having/
@@ -97,5 +100,23 @@ return { -- Autocompletion
         },
       }),
     })
+
+    -- <C-x><C-k> for dictionary completion
+    require('cmp_dictionary').setup {
+      paths = { '/usr/share/dict/words' },
+      exact_length = 2,
+      first_case_insensitive = true,
+      document = {
+        enable = true,
+        -- sudo apt install wordnet
+        command = { 'wn', '${label}', '-over' },
+      },
+    }
+    vim.api.nvim_set_keymap(
+      'i',
+      '<C-x><C-k>',
+      [[<Cmd>lua require'cmp'.complete({ config = { sources = { { name = 'dictionary' } } } })<CR>]],
+      { desc = 'complete from dictionary', noremap = true, silent = true }
+    )
   end,
 }

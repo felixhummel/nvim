@@ -24,6 +24,9 @@ set complete=.,w,b,u,t
 set noswapfile  " disable swapfiles
 
 autocmd BufWritePost ~/LOG/*.md silent execute '!cd $(dirname %) && git status -s >/dev/null && git add $(basename %) && git commit -qm log -- $(basename %) >/dev/null'
+
+" https://vim.fandom.com/wiki/Dictionary_completions
+set dictionary+=/usr/share/dict/words
 ]]
 
 vim.g.mapleader = ' '
@@ -87,7 +90,6 @@ local _lazy_setup = {
   'mrcjkb/nvim-lastplace', -- remember cursor position
   'junegunn/fzf.vim', -- old-school fzf
   'https://gitlab.com/mcepl/vim-fzfspell/', -- spelling with fzf
-  -- TODO: https://github.com/stevearc/oil.nvim anyways, but may be an alternative
   require 'plugins.nvim-tree',
   { 'declancm/maximize.nvim', config = true },
   require 'plugins.clipboard-images',
