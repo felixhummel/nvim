@@ -1,5 +1,8 @@
 -- based on https://github.com/nvim-lua/kickstart.nvim
 
+-- keep block cursor in insert mode
+vim.opt.guicursor = ''
+
 -- only complete things you are certain about, e.g.
 -- `:e ~/.c<TAB>` remains at ~/.c and shows preview with ~/.cache, ~/.config, ...
 -- https://www.reddit.com/r/neovim/comments/10rsl92/comment/j6xc38q/
