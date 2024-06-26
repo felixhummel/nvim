@@ -1,4 +1,3 @@
 - i`<Tab> should create a markdown code block
 - ve` should surround selection with `
 - https://github.com/stevearc/oil.nvim
-- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#confirm-candidate-on-tab-immediately-when-theres-only-one-completion-entry
