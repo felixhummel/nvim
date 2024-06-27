@@ -89,7 +89,12 @@ return { -- Autocompletion
         { name = 'buffer' },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
-        { name = 'path' },
+        {
+          name = 'path',
+          option = {
+            trailing_slash = true,
+          },
+        },
       },
     }
 
@@ -110,7 +115,7 @@ return { -- Autocompletion
           name = 'cmdline',
           option = {
             ignore_cmds = { 'Man', '!' },
-            treat_trailing_slash = false,
+            treat_trailing_slash = true,
           },
         },
       }),
