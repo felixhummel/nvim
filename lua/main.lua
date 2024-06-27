@@ -27,6 +27,10 @@ autocmd BufWritePost ~/LOG/*.md silent execute '!cd $(dirname %) && git status -
 
 " https://vim.fandom.com/wiki/Dictionary_completions
 set dictionary+=/usr/share/dict/words
+
+" spellcheck (since neovim 0.9)
+set spelllang=de_de,en_us
+set spellcapcheck=
 ]]
 
 vim.g.mapleader = ' '
