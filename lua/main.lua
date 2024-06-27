@@ -94,7 +94,7 @@ local _lazy_setup = {
   'mrcjkb/nvim-lastplace', -- remember cursor position
   'junegunn/fzf.vim', -- old-school fzf
   'https://gitlab.com/mcepl/vim-fzfspell/', -- spelling with fzf
-  require 'plugins.nvim-tree',
+  require 'plugins.oil',
   { 'declancm/maximize.nvim', config = true },
   require 'plugins.clipboard-images',
   -- ausprobieren
