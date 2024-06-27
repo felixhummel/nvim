@@ -1,0 +1,9 @@
+- [ ] markdown code block
+	- [ ] i`<Tab>
+	- [ ] V`
+- [ ] markdown inline code with ve`
+- [ ] <leader>wg
+	- should [w]eb [g]oogle
+		- the word under cursor
+		- the visual selection
+	- replace [W]orkspace (which-key)
