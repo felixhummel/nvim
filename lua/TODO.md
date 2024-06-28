@@ -1,3 +1,6 @@
+- [ ] `<C-x><C-h>` for history completion
+	- using cmp was problematic with multiple lines
+	- use old school fzf as before for now
 - [ ] markdown code block
 	- [ ] i`<Tab>
 	- [ ] V`
@@ -7,3 +10,4 @@
 		- the word under cursor
 		- the visual selection
 	- replace [W]orkspace (which-key)
+- `cmp.setup.cmdline` with less completions (but not the global `vim.opt.pumheight`)
