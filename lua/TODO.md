@@ -11,3 +11,6 @@
 		- the visual selection
 	- replace [W]orkspace (which-key)
 - `cmp.setup.cmdline` with less completions (but not the global `vim.opt.pumheight`)
+- [ ] map `<leader>gg` to `[G]oto [G]oogle` for word under cursor (visual too)
+	- prior art: https://superuser.com/questions/211989/is-there-a-vim-plugin-that-lets-you-google-the-selected-text
+	- but a good excuse to learn some lua scripting ;)

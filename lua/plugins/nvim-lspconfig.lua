@@ -85,6 +85,10 @@ return {
     local servers = {
       pyright = {},
       rust_analyzer = {},
+      -- This language service will emit VS Code-specific telemetry events. If using the service outside of VS Code (e.g. in Vim), these telemetry events can be safely ignored.
+      -- https://github.com/microsoft/compose-language-service#telemetry
+      -- The following must be set for docker compose files: filetype=yaml.docker-compose
+      docker_compose_language_service = {},
       -- `:help lspconfig-all` for a list of all the pre-configured LSPs
       lua_ls = {
         settings = {

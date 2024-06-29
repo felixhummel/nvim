@@ -1,3 +1,4 @@
+-- vim: ts=2 sts=2 sw=2 et
 -- based on https://github.com/nvim-lua/kickstart.nvim
 
 -- keep block cursor in insert mode
@@ -102,4 +103,12 @@ local _lazy_setup = {
 }
 local _lazy_config = require 'config.lazy'
 require('lazy').setup(_lazy_setup, _lazy_config)
--- vim: ts=2 sts=2 sw=2 et
+
+local function set_filetype(pattern, filetype)
+  vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+    pattern = pattern,
+    command = 'set filetype=' .. filetype,
+  })
+end
+
+set_filetype({ 'docker-compose*.yml' }, 'yaml.docker-compose')
