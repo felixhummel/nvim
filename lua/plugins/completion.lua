@@ -1,33 +1,15 @@
 return { -- Autocompletion
   'hrsh7th/nvim-cmp',
-  event = 'InsertEnter',
+  -- always :>
+  -- event = 'InsertEnter',
   dependencies = {
     -- Snippet Engine & its associated nvim-cmp source
     {
       'L3MON4D3/LuaSnip',
-      build = (function()
-        -- Build Step is needed for regex support in snippets.
-        -- This step is not supported in many windows environments.
-        -- Remove the below condition to re-enable on windows.
-        if vim.fn.has('win32') == 1 or vim.fn.executable('make') == 0 then
-          return
-        end
-        return 'make install_jsregexp'
-      end)(),
+      build = 'make install_jsregexp',
       config = function()
         require('luasnip.loaders.from_snipmate').lazy_load()
       end,
-      dependencies = {
-        -- `friendly-snippets` contains a variety of premade snippets.
-        --    See the README about individual language/framework/plugin snippets:
-        --    https://github.com/rafamadriz/friendly-snippets
-        -- {
-        --   'rafamadriz/friendly-snippets',
-        --   config = function()
-        --     require('luasnip.loaders.from_vscode').lazy_load()
-        --   end,
-        -- },
-      },
     },
     'saadparwaiz1/cmp_luasnip',
     'hrsh7th/cmp-buffer',
@@ -38,47 +20,36 @@ return { -- Autocompletion
     'uga-rosa/cmp-dictionary',
   },
   config = function()
-    -- See `:help cmp`
     local cmp = require('cmp')
     local luasnip = require('luasnip')
     luasnip.config.setup({})
 
-    -- https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#confirm-candidate-on-tab-immediately-when-theres-only-one-completion-entry
-    local has_words_before = function()
-      unpack = unpack or table.unpack
-      local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+    local tab_handler = function(fallback)
+      -- bash-like behavior; see :h cmp.complete_common_string
+      if cmp.visible() then
+        return cmp.complete_common_string()
+      end
+      fallback()
+    end
+    -- map all modes (insert, select, command), so we can use the mappings in all completion setups
+    local map = function(callable)
+      return cmp.mapping(callable, { 'i', 's', 'c' })
     end
 
     local my_mappings = {
-      -- bash-like
-      ['<Tab>'] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          if #cmp.get_entries() == 1 then
-            cmp.confirm({ select = true })
-          end
-          -- do not rotate through completions; do nothing instead
-        elseif has_words_before() then
-          cmp.complete()
-          if #cmp.get_entries() == 1 then
-            cmp.confirm({ select = true })
-          end
-        else
-          fallback()
-        end
-      end, { 'i', 's' }),
-      ['<C-n>'] = cmp.mapping.select_next_item(),
-      ['<Down>'] = cmp.mapping.select_next_item(),
-      ['<C-p>'] = cmp.mapping.select_prev_item(),
-      ['<Up>'] = cmp.mapping.select_next_item(),
-      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<Tab>'] = map(tab_handler),
+      ['<C-n>'] = map(cmp.mapping.select_next_item()),
+      ['<Down>'] = map(cmp.mapping.select_next_item()),
+      ['<C-p>'] = map(cmp.mapping.select_prev_item()),
+      ['<Up>'] = map(cmp.mapping.select_next_item()),
+      ['<C-b>'] = map(cmp.mapping.scroll_docs(-4)),
+      ['<C-f>'] = map(cmp.mapping.scroll_docs(4)),
       -- https://www.reddit.com/r/neovim/comments/xrbdny/how_to_select_from_nvimcmp_only_after_having/
-      ['<CR>'] = cmp.mapping.confirm({ select = false }),
-      ['<C-Space>'] = cmp.mapping.complete({}),
+      ['<CR>'] = map(cmp.mapping.confirm({ select = false })),
+      ['<C-Space>'] = map(cmp.mapping.complete({})),
     }
 
-    local path_with_trailing_slash = {
+    local path_source_with_trailing_slash = {
       name = 'path',
       option = {
         trailing_slash = true,
@@ -99,7 +70,7 @@ return { -- Autocompletion
         { name = 'buffer' },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
-        path_with_trailing_slash,
+        path_source_with_trailing_slash,
       },
     })
 
@@ -110,16 +81,16 @@ return { -- Autocompletion
       },
     })
 
-    -- `:` cmdline setup.
     cmp.setup.cmdline(':', {
       mapping = cmp.mapping.preset.cmdline(my_mappings),
       sources = cmp.config.sources({
-        path_with_trailing_slash,
+        path_source_with_trailing_slash,
       }, {
         {
           name = 'cmdline',
           option = {
             ignore_cmds = { 'Man', '!' },
+            treat_trailing_slash = false,
           },
         },
       }),
