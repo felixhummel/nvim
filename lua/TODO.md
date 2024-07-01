@@ -2,7 +2,7 @@
 	- using cmp was problematic with multiple lines
 	- use old school fzf as before for now
 - [ ] markdown code block
-	- [ ] i`<Tab>
+	- [x] i`<Tab>
 	- [ ] V`
 - [ ] markdown inline code with ve`
 - [ ] <leader>wg
