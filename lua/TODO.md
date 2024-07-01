@@ -11,6 +11,12 @@
 		- the visual selection
 	- replace [W]orkspace (which-key)
 - `cmp.setup.cmdline` with less completions (but not the global `vim.opt.pumheight`)
+- [x] use `plugins/` to make lazy reload stuff automatically
+	  https://youtu.be/4zyZ3sw_ulc?list=PLsz00TDipIffreIaUNk64KxTIkQaGguqn&t=324
+- [ ] try vim-dadbod (SQL)
+	  [Vim Dadbod - My Favorite SQL Plugin](https://www.youtube.com/watch?v=ALGBuFLzDSA)
+- [ ] make `here<TAB>` work again (snippet)
+- [ ] try https://github.com/AckslD/nvim-neoclip.lua?tab=readme-ov-file
 - [ ] map `<leader>gg` to `[G]oto [G]oogle` for word under cursor (visual too)
 	- prior art: https://superuser.com/questions/211989/is-there-a-vim-plugin-that-lets-you-google-the-selected-text
 	- but a good excuse to learn some lua scripting ;)
