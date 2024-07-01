@@ -15,9 +15,9 @@ vim.opt.mouse = '' -- disable mouse
 
 vim.opt.laststatus = 2
 vim.opt.tabpagemax = 50
-vim.opt.iskeyword:append '-'
+vim.opt.iskeyword:append('-')
 
-vim.cmd [[
+vim.cmd([[
 set iskeyword+=-
 set undofile
 set undodir=~/.vim/undodir
@@ -32,11 +32,11 @@ set dictionary+=/usr/share/dict/words
 " spellcheck (since neovim 0.9)
 set spelllang=de_de,en_us
 set spellcapcheck=
-]]
+]])
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-require 'bindings'
+require('bindings')
 
 -- nvim-tree wants us to disable netrw
 vim.g.loaded_netrw = 1
@@ -78,12 +78,12 @@ vim.opt.listchars = { tab = '» ', nbsp = '␣' }
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 
-require 'autocommands'
-require '_lazy_install'
+require('autocommands')
+require('_lazy_install')
 
 -- https://lazy.folke.io/installation
 -- https://lazy.folke.io/usage/structuring
-require('lazy').setup {
+require('lazy').setup({
   spec = {
     { import = 'plugins' },
   },
@@ -106,6 +106,6 @@ require('lazy').setup {
       lazy = '💤 ',
     },
   },
-}
+})
 
-require 'config.set-filetypes'
+require('config.set-filetypes')
