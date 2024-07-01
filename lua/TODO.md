@@ -1,4 +1,4 @@
-- [ ] `<C-x><C-h>` for history completion
+- [x] `<C-x><C-h>` for history completion
 	- using cmp was problematic with multiple lines
 	- use old school fzf as before for now
 - [ ] markdown code block
