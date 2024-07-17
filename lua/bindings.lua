@@ -18,4 +18,5 @@ map <F10> :NvimTreeFocus<CR>
 " move lines with alt+up/down
 map <M-Up> :m.-2<CR>
 map <M-Down> :m.+1<CR>
+vmap ` sa`
 ]]
