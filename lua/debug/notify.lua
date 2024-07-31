@@ -1,0 +1,5 @@
+vim.notify('error message', 'trace')
+vim.notify('debug message', 'debug')
+vim.notify('info messsage', 'info')
+vim.notify('warn message', 'warn')
+vim.notify('error message', 'error')

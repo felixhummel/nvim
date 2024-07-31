@@ -15,9 +15,9 @@ vim.opt.mouse = '' -- disable mouse
 
 vim.opt.laststatus = 2
 vim.opt.tabpagemax = 50
-vim.opt.iskeyword:append '-'
+vim.opt.iskeyword:append('-')
 
-vim.cmd [[
+vim.cmd([[
 set iskeyword+=-
 set undofile
 set undodir=~/.vim/undodir
@@ -32,11 +32,11 @@ set dictionary+=/usr/share/dict/words
 " spellcheck (since neovim 0.9)
 set spelllang=de_de,en_us
 set spellcapcheck=
-]]
+]])
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
-require 'bindings'
+require('bindings')
 
 -- nvim-tree wants us to disable netrw
 vim.g.loaded_netrw = 1
@@ -78,37 +78,34 @@ vim.opt.listchars = { tab = '» ', nbsp = '␣' }
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 
-require 'autocommands'
-require '_lazy_install'
+require('autocommands')
+require('_lazy_install')
 
-local _lazy_setup = {
-  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-  require 'plugins.comment',
-  require 'plugins.which-key',
-  require 'plugins.telescope',
-  require 'plugins.nvim-lspconfig',
-  require 'plugins.autoformat',
-  require 'plugins.completion',
-  require 'plugins.colorscheme',
-  require 'plugins.mini',
-  require 'plugins.treesitter',
-  'mrcjkb/nvim-lastplace', -- remember cursor position
-  'junegunn/fzf.vim', -- old-school fzf
-  'https://gitlab.com/mcepl/vim-fzfspell/', -- spelling with fzf
-  require 'plugins.oil',
-  { 'declancm/maximize.nvim', config = true },
-  require 'plugins.clipboard-images',
-  -- ausprobieren
-  -- https://github.com/AckslD/nvim-neoclip.lua?tab=readme-ov-file
-}
-local _lazy_config = require 'config.lazy'
-require('lazy').setup(_lazy_setup, _lazy_config)
+-- https://lazy.folke.io/installation
+-- https://lazy.folke.io/usage/structuring
+require('lazy').setup({
+  spec = {
+    { import = 'plugins' },
+  },
+  ui = {
+    -- If you are using a Nerd Font: set icons to an empty table which will use the
+    -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
+    icons = vim.g.have_nerd_font and {} or {
+      cmd = '⌘',
+      config = '🛠',
+      event = '📅',
+      ft = '📂',
+      init = '⚙',
+      keys = '🗝',
+      plugin = '🔌',
+      runtime = '💻',
+      require = '🌙',
+      source = '📄',
+      start = '🚀',
+      task = '📌',
+      lazy = '💤 ',
+    },
+  },
+})
 
-local function set_filetype(pattern, filetype)
-  vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-    pattern = pattern,
-    command = 'set filetype=' .. filetype,
-  })
-end
-
-set_filetype({ 'docker-compose*.yml' }, 'yaml.docker-compose')
+require('config.set-filetypes')

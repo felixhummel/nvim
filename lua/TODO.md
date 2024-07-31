@@ -1,16 +1,26 @@
-- [ ] `<C-x><C-h>` for history completion
+- [x] `<C-x><C-h>` for history completion
 	- using cmp was problematic with multiple lines
 	- use old school fzf as before for now
 - [ ] markdown code block
-	- [ ] i`<Tab>
+	- [x] i`<Tab>
 	- [ ] V`
-- [ ] markdown inline code with ve`
+- [x] markdown inline code with ve`
 - [ ] <leader>wg
 	- should [w]eb [g]oogle
 		- the word under cursor
 		- the visual selection
 	- replace [W]orkspace (which-key)
-- `cmp.setup.cmdline` with less completions (but not the global `vim.opt.pumheight`)
-- [ ] map `<leader>gg` to `[G]oto [G]oogle` for word under cursor (visual too)
 	- prior art: https://superuser.com/questions/211989/is-there-a-vim-plugin-that-lets-you-google-the-selected-text
-	- but a good excuse to learn some lua scripting ;)
+	- a good excuse to learn some lua scripting ;)
+- `cmp.setup.cmdline` with less completions (but not the global `vim.opt.pumheight`)
+- [x] use `plugins/` to make lazy reload stuff automatically
+	  https://youtu.be/4zyZ3sw_ulc?list=PLsz00TDipIffreIaUNk64KxTIkQaGguqn&t=324
+- [ ] make `here<TAB>` for `*.sh` work again (snippet)
+- [ ] try [nvim-neoclip](https://github.com/AckslD/nvim-neoclip.lua)
+- [ ] limit cmp suggestions for cmdline to 8
+- [ ] try vim-dadbod (SQL)
+	  [Vim Dadbod - My Favorite SQL Plugin](https://www.youtube.com/watch?v=ALGBuFLzDSA)
+- [ ] notify without animations
+- [ ] default indent: 2 spaces
+- [ ] status line
+- [ ] customize color scheme using https://github.com/rktjmp/lush.nvim

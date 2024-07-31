@@ -13,10 +13,12 @@ vim.keymap.set('n', '<M-Right>', vim.diagnostic.goto_next, { desc = 'Go to next 
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
-vim.cmd [[
+vim.cmd([[
 map <F10> :NvimTreeFocus<CR>
 " move lines with alt+up/down
-map <M-Up> :m.-2<CR>
-map <M-Down> :m.+1<CR>
+nmap <M-Up> :m.-2<CR>
+nmap <M-Down> :m.+1<CR>
+
+" uses mini.surround
 vmap ` sa`
-]]
+]])
