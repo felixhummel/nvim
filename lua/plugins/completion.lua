@@ -61,7 +61,11 @@ return {
           luasnip.lsp_expand(args.body)
         end,
       },
-      completion = { completeopt = 'longest,menuone,noselect' },
+      completion = {
+        completeopt = 'longest,menuone,noselect',
+        -- umlauts c.f https://github.com/hrsh7th/nvim-cmp/issues/808
+        keyword_pattern = [[\k\+]],
+      },
       preselect = cmp.PreselectMode.None,
 
       mapping = cmp.mapping.preset.insert(my_mappings),
