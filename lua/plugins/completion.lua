@@ -24,11 +24,20 @@ return {
     luasnip.config.setup({})
 
     local tab_handler = function(fallback)
-      -- bash-like behavior; see :h cmp.complete_common_string
       if cmp.visible() then
-        return cmp.complete_common_string()
+        -- expand snippet
+        if luasnip.expandable() then
+          luasnip.expand()
+        else
+          -- bash-like behavior; see :h cmp.complete_common_string
+          cmp.complete_common_string()
+        end
+        -- no completions? jump to next snippet location
+      elseif luasnip.locally_jumpable(1) then
+        luasnip.jump(1)
+      else
+        fallback()
       end
-      fallback()
     end
     -- map all modes (insert, select, command), so we can use the mappings in all completion setups
     local map = function(callable)
