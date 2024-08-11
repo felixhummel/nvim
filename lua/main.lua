@@ -44,6 +44,13 @@ vim.g.loaded_netrwPlugin = 1
 
 vim.g.have_nerd_font = true
 
+-- Explicitly set Python. This resulted in a speedup from 6000ms to 1ms for finding Python in my setup. Could be due to pyenv and many interpreters on my machine.
+-- Thanks to https://www.reddit.com/r/neovim/comments/ksf0i4/comment/giigobp/
+local python_felix = vim.fn.expand('~/.pyenv/versions/felix/bin/python')
+if vim.fn.filereadable(python_felix) then
+  vim.g.python3_host_prog = python_felix
+end
+
 vim.opt.number = false
 
 -- Don't show the mode, since it's already in the status line
