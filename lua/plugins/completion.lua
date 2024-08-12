@@ -75,7 +75,16 @@ return {
 
       mapping = cmp.mapping.preset.insert(my_mappings),
       sources = {
-        { name = 'buffer' },
+        {
+          name = 'buffer',
+          option = {
+            -- complete all buffers
+            -- https://github.com/hrsh7th/cmp-buffer#all-buffers
+            get_bufnrs = function()
+              return vim.api.nvim_list_bufs()
+            end,
+          },
+        },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         path_source_with_trailing_slash,
