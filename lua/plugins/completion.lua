@@ -47,9 +47,9 @@ return {
     local my_mappings = {
       ['<Tab>'] = map(tab_handler),
       ['<C-n>'] = map(cmp.mapping.select_next_item()),
-      ['<Down>'] = map(cmp.mapping.select_next_item()),
+      -- ['<Down>'] = map(cmp.mapping.select_next_item()),
       ['<C-p>'] = map(cmp.mapping.select_prev_item()),
-      ['<Up>'] = map(cmp.mapping.select_next_item()),
+      -- ['<Up>'] = map(cmp.mapping.select_next_item()),
       ['<C-b>'] = map(cmp.mapping.scroll_docs(-4)),
       ['<C-f>'] = map(cmp.mapping.scroll_docs(4)),
       -- https://www.reddit.com/r/neovim/comments/xrbdny/how_to_select_from_nvimcmp_only_after_having/
