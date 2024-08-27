@@ -1,9 +1,9 @@
 - [x] `<C-x><C-h>` for history completion
 	- using cmp was problematic with multiple lines
 	- use old school fzf as before for now
-- [ ] markdown code block
-	- [x] i`<Tab>
-	- [ ] V`
+- [x] markdown code block
+	- [x] ```i`<Tab>```
+	- [x] ```V\````
 - [x] markdown inline code with ve`
 - [ ] <leader>wg
 	- should [w]eb [g]oogle
@@ -24,3 +24,9 @@
 - [ ] default indent: 2 spaces
 - [ ] status line
 - [ ] customize color scheme using https://github.com/rktjmp/lush.nvim
+- [x] function / mapping to list key mappings in telescope
+	  via [Which is Better Flash.nvim OR Leap.nvim? - YouTube](https://www.youtube.com/watch?v=eJ3XV-3uoug&t=98s)
+	  was already present (thanks, TJ!) via `<leader>sk`
+- [ ] nvim oil split and fix `map <F10> :NvimTreeFocus<CR>`
+- [ ] try [flash.nvim](https://github.com/folke/flash.nvim)
+	  via [Which is Better Flash.nvim OR Leap.nvim? - YouTube](https://www.youtube.com/watch?v=eJ3XV-3uoug&t=113s)

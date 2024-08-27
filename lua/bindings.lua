@@ -18,7 +18,4 @@ map <F10> :NvimTreeFocus<CR>
 " move lines with alt+up/down
 nmap <M-Up> :m.-2<CR>
 nmap <M-Down> :m.+1<CR>
-
-" uses mini.surround
-vmap ` sa`
 ]])
