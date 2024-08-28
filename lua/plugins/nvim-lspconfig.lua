@@ -56,6 +56,7 @@ return {
         -- Execute a code action, usually your cursor needs to be on top of an error
         -- or a suggestion from your LSP for this to activate.
         map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+        map('<M-Enter>', vim.lsp.buf.code_action, '[C]ode [A]ction')
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
         map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
@@ -112,9 +113,9 @@ return {
     vim.list_extend(ensure_installed, {
       'stylua',
     })
-    require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+    require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
-    require('mason-lspconfig').setup {
+    require('mason-lspconfig').setup({
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}
@@ -125,6 +126,6 @@ return {
           require('lspconfig')[server_name].setup(server)
         end,
       },
-    }
+    })
   end,
 }
