@@ -84,7 +84,7 @@ return {
     --  - settings (table): Override the default settings passed when initializing the server.
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
-      pyright = {},
+      basedpyright = {},
       rust_analyzer = {},
       -- This language service will emit VS Code-specific telemetry events. If using the service outside of VS Code (e.g. in Vim), these telemetry events can be safely ignored.
       -- https://github.com/microsoft/compose-language-service#telemetry
