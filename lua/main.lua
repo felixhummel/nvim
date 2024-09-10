@@ -34,8 +34,8 @@ set spelllang=de_de,en_us
 set spellcapcheck=
 ]])
 
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = '\\'
+vim.g.maplocalleader = '\\'
 require('bindings')
 
 -- nvim-tree wants us to disable netrw
