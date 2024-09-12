@@ -116,3 +116,6 @@ require('lazy').setup({
 })
 
 require('config.set-filetypes')
+
+-- load old-school vim scripts
+vim.cmd('source ' .. vim.fn.stdpath('config') .. '/vimscripts/functions.vim')
