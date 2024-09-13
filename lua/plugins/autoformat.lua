@@ -41,10 +41,14 @@ return {
     end,
     formatters_by_ft = {
       lua = { 'stylua' },
-      sql = { 'sqlfluff' },
+      sql = { 'sleek' },
       python = { 'ruff' },
     },
     formatters = {
+      sleek = {
+        command = 'sleek',
+        args = '--indent-spaces=2 --lines-between-queries=3',
+      },
       sqlfluff = {
         args = { 'format', '--dialect=duckdb', '-' },
       },
