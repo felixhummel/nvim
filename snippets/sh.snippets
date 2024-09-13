@@ -1,0 +1,14 @@
+snippet #!
+	#!/bin/bash
+
+snippet set
+	set -euo pipefail
+
+	$0
+
+
+snippet args arguments as array
+	args=(
+	  $1
+	)
+	$2 "${args[@]}"
