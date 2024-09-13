@@ -17,6 +17,7 @@ return {
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-emoji',
     'uga-rosa/cmp-dictionary',
+    'dmitmel/cmp-cmdline-history',
   },
   config = function()
     local cmp = require('cmp')
@@ -44,18 +45,24 @@ return {
       return cmp.mapping(callable, { 'i', 's', 'c' })
     end
 
-    local my_mappings = {
+    -- Command line mappings are special, but share many of the default buffer mappings.
+    -- For example, up/down should go through the history in command mode
+    -- (instead of selecting from the completion menu).
+    local shared_mappings = {
       ['<Tab>'] = map(tab_handler),
       ['<C-n>'] = map(cmp.mapping.select_next_item()),
-      -- ['<Down>'] = map(cmp.mapping.select_next_item()),
       ['<C-p>'] = map(cmp.mapping.select_prev_item()),
-      -- ['<Up>'] = map(cmp.mapping.select_next_item()),
       ['<C-b>'] = map(cmp.mapping.scroll_docs(-4)),
       ['<C-f>'] = map(cmp.mapping.scroll_docs(4)),
       -- https://www.reddit.com/r/neovim/comments/xrbdny/how_to_select_from_nvimcmp_only_after_having/
       ['<CR>'] = map(cmp.mapping.confirm({ select = false })),
       ['<C-Space>'] = map(cmp.mapping.complete({})),
     }
+
+    local buffer_mappings = vim.tbl_extend('force', shared_mappings, {
+      ['<Down>'] = map(cmp.mapping.select_next_item()),
+      ['<Up>'] = map(cmp.mapping.select_prev_item()),
+    })
 
     local path_source_with_trailing_slash = {
       name = 'path',
@@ -73,7 +80,7 @@ return {
       completion = { completeopt = 'longest,menuone,noselect' },
       preselect = cmp.PreselectMode.None,
 
-      mapping = cmp.mapping.preset.insert(my_mappings),
+      mapping = cmp.mapping.preset.insert(buffer_mappings),
       sources = {
         {
           name = 'buffer',
@@ -91,15 +98,8 @@ return {
       },
     })
 
-    cmp.setup.cmdline('/', {
-      mapping = cmp.mapping.preset.cmdline(my_mappings),
-      sources = {
-        { name = 'buffer' },
-      },
-    })
-
     cmp.setup.cmdline(':', {
-      mapping = cmp.mapping.preset.cmdline(my_mappings),
+      mapping = cmp.mapping.preset.cmdline(shared_mappings),
       sources = cmp.config.sources({
         path_source_with_trailing_slash,
       }, {
@@ -110,7 +110,15 @@ return {
             treat_trailing_slash = false,
           },
         },
+        { name = 'cmdline_history' },
       }),
+    })
+
+    cmp.setup.cmdline('/', {
+      mapping = cmp.mapping.preset.cmdline(shared_mappings),
+      sources = {
+        { name = 'buffer' },
+      },
     })
 
     -- <C-x><C-k> for dictionary completion

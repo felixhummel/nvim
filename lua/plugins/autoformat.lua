@@ -19,6 +19,8 @@ return {
       desc = '[F]ormat buffer',
     },
   },
+  ---@module "conform"
+  ---@type conform.setupOpts
   opts = {
     notify_on_error = false,
     format_on_save = function(bufnr)
@@ -26,7 +28,7 @@ return {
       local bufname = vim.api.nvim_buf_get_name(0)
       local pattern = vim.glob.to_lpeg('docker-compose*.y*ml')
       if pattern:match(bufname) then
-        return false
+        return nil
       end
       -- Disable "format_on_save lsp_fallback" for languages that don't
       -- have a well standardized coding style. You can add additional
@@ -39,12 +41,13 @@ return {
     end,
     formatters_by_ft = {
       lua = { 'stylua' },
-      -- Conform can also run multiple formatters sequentially
-      -- python = { "isort", "black" },
-      --
-      -- You can use a sub-list to tell conform to run *until* a formatter
-      -- is found.
-      -- javascript = { { "prettierd", "prettier" } },
+      sql = { 'sqlfluff' },
+      python = { 'ruff' },
+    },
+    formatters = {
+      sqlfluff = {
+        args = { 'format', '--dialect=duckdb', '-' },
+      },
     },
   },
 }
