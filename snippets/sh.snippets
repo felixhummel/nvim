@@ -12,3 +12,13 @@ snippet args arguments as array
 	  $1
 	)
 	$2 "${args[@]}"
+
+snippet shellcheck-ignore ignore shellcheck stuff
+	# shellcheck disable=$1
+
+
+snippet here
+	here=$(cd "\$(dirname "\$0")" && pwd)
+
+snippet die
+	die() { echo "\$@" 2>&1; exit 1; }
