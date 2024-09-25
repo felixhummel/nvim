@@ -118,4 +118,8 @@ require('lazy').setup({
 require('config.set-filetypes')
 
 -- load old-school vim scripts
-vim.cmd('source ' .. vim.fn.stdpath('config') .. '/vimscripts/functions.vim')
+local old_school_vim_scripts_glob = vim.fn.stdpath('config') .. '/vimscripts/*.vim'
+local old_school_vim_scripts = vim.fn.glob(old_school_vim_scripts_glob, true, true)
+for _, file in ipairs(old_school_vim_scripts) do
+  vim.cmd('source ' .. file)
+end

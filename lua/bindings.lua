@@ -1,4 +1,4 @@
-vim.keymap.set('n', '<C-p>', '"+p', { desc = 'paste from system clipboard' })
+vim.keymap.set('n', '<C-p>', '<cmd>FelixClip<CR>', { desc = 'paste from system clipboard' })
 vim.keymap.set({ 'n', 'v' }, '<C-y>', '"+y', { desc = 'copy to system clipboard' })
 
 vim.keymap.set('n', '<F5>', '<cmd>w<bar>source %<CR>', { desc = 'execute current file' })
