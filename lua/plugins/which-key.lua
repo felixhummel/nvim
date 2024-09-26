@@ -7,7 +7,7 @@ return { -- Useful plugin to show you pending keybinds.
 
     -- normal
     which_key.add({
-      { '<leader>c', group = '[C]ode' },
+      { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
       { '<leader>d', group = '[D]ocument' },
       { '<leader>h', group = '[H]elp' },
       { '<leader>r', group = '[R]ename' },
