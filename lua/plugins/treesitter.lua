@@ -16,7 +16,11 @@ return {
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
         additional_vim_regex_highlighting = { 'ruby' },
       },
-      indent = { enable = true, disable = { 'ruby' } },
+      indent = {
+        enable = true,
+        -- https://www.reddit.com/r/neovim/comments/1agynre/how_to_make_markdown_list_items_indent_behind_the/
+        disable = { 'ruby', 'markdown' },
+      },
       textobjects = {
         select = {
           enable = true,
