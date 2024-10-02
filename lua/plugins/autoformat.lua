@@ -43,6 +43,7 @@ return {
       lua = { 'stylua' },
       sql = { 'sleek' },
       python = { 'ruff' },
+      css = { 'prettierd', 'prettier', stop_after_first = true },
     },
     formatters = {
       sleek = {
