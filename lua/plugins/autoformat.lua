@@ -42,7 +42,7 @@ return {
     formatters_by_ft = {
       lua = { 'stylua' },
       sql = { 'sleek' },
-      python = { 'ruff' },
+      python = { 'ruff_format' },
       css = { 'prettierd', 'prettier', stop_after_first = true },
     },
     formatters = {
