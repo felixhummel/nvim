@@ -102,6 +102,7 @@ return {
       mapping = cmp.mapping.preset.cmdline(shared_mappings),
       sources = cmp.config.sources({
         path_source_with_trailing_slash,
+        max_item_count = 3,
       }, {
         {
           name = 'cmdline',
@@ -109,8 +110,12 @@ return {
             ignore_cmds = { 'Man', '!' },
             treat_trailing_slash = false,
           },
+          max_item_count = 3,
         },
-        { name = 'cmdline_history' },
+        {
+          name = 'cmdline_history',
+          max_item_count = 3,
+        },
       }),
     })
 
