@@ -36,6 +36,16 @@ return { -- Fuzzy Finder (files, lsp, etc)
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
 
+    ---@return string # Oil's current directory. Fall back to cwd.
+    local function get_relevant_dir()
+      local result = vim.fn.getcwd()
+      local oil_dir = require('oil').get_current_dir()
+      if type(oil_dir) == 'string' then
+        result = oil_dir
+      end
+      return result
+    end
+
     local builtin = require('telescope.builtin')
     vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
     vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
@@ -49,7 +59,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
     vim.keymap.set('n', '<C-f>', function()
-      builtin.live_grep({ cwd = vim.fn.getcwd() })
+      builtin.find_files({ cwd = get_relevant_dir() })
     end, { desc = 'Find files' })
 
     vim.keymap.set('n', '<leader>/', function()
