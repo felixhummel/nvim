@@ -7,19 +7,19 @@ return { -- Useful plugin to show you pending keybinds.
 
     -- normal
     which_key.add({
-      { '<leader>c', group = '[C]ode', mode = { 'n', 'x' } },
-      { '<leader>d', group = '[D]ocument' },
-      { '<leader>h', group = '[H]elp' },
-      { '<leader>r', group = '[R]ename' },
-      { '<leader>s', group = '[S]earch' },
-      { '<leader>t', group = '[T]oggle' },
-      { '<leader>w', group = '[W]orkspace' },
+      { '<leader>c', group = 'Code', mode = { 'n', 'x' } },
+      { '<leader>d', group = 'Document' },
+      { '<leader>h', group = 'Help' },
+      { '<leader>r', group = 'Rename' },
+      { '<leader>s', group = 'Search' },
+      { '<leader>t', group = 'Toggle' },
+      { '<leader>w', group = 'Workspace' },
     })
 
     -- visual
     which_key.add({
       '<leader>h',
-      desc = 'Git [H]unk',
+      desc = 'Git Hunk',
       mode = 'v',
     })
   end,
