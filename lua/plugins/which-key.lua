@@ -14,6 +14,7 @@ return { -- Useful plugin to show you pending keybinds.
       { '<leader>s', group = 'Search' },
       { '<leader>t', group = 'Toggle' },
       { '<leader>w', group = 'Workspace' },
+      { '<leader>v', group = 'Vim' },
     })
 
     -- visual

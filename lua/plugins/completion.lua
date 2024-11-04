@@ -1,3 +1,5 @@
+-- note: if you use the cmp.config.sources() helper, then first completion with hits wins.
+-- https://github.com/hrsh7th/nvim-cmp/blob/29fb4854573355792df9e156cb779f0d31308796/doc/cmp.txt#L648
 return {
   'hrsh7th/nvim-cmp',
   -- always :>
@@ -21,6 +23,7 @@ return {
   },
   config = function()
     local cmp = require('cmp')
+    local default_config = require('cmp.config').get()
     local luasnip = require('luasnip')
     luasnip.config.setup({})
 
@@ -64,14 +67,15 @@ return {
       ['<Up>'] = map(cmp.mapping.select_prev_item()),
     })
 
-    local path_source_with_trailing_slash = {
-      name = 'path',
-      option = {
-        trailing_slash = true,
-      },
-    }
-
     cmp.setup({
+      formatting = {
+        fields = default_config.formatting.fields,
+        expandable_indicator = default_config.formatting.expandable_indicator,
+        format = function(entry, vim_item)
+          vim_item.menu = entry.source.name
+          return vim_item
+        end,
+      },
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
@@ -94,16 +98,30 @@ return {
         },
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
-        path_source_with_trailing_slash,
+        {
+          name = 'path',
+          option = {
+            trailing_slash = true,
+          },
+        },
       },
     })
 
     cmp.setup.cmdline(':', {
+      -- matching = { disallow_symbol_nonprefix_matching = false },
       mapping = cmp.mapping.preset.cmdline(shared_mappings),
-      sources = cmp.config.sources({
-        path_source_with_trailing_slash,
-        max_item_count = 3,
-      }, {
+      sources = {
+        {
+          name = 'cmdline_history',
+          max_item_count = 8,
+        },
+        {
+          name = 'path',
+          max_item_count = 3,
+          option = {
+            trailing_slash = true,
+          },
+        },
         {
           name = 'cmdline',
           option = {
@@ -112,17 +130,16 @@ return {
           },
           max_item_count = 3,
         },
-        {
-          name = 'cmdline_history',
-          max_item_count = 3,
-        },
-      }),
+      },
     })
 
     cmp.setup.cmdline('/', {
       mapping = cmp.mapping.preset.cmdline(shared_mappings),
       sources = {
-        { name = 'buffer' },
+        {
+          name = 'buffer',
+          max_item_count = 5,
+        },
       },
     })
 
