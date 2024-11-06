@@ -1,7 +1,15 @@
 vim.keymap.set('n', '<C-p>', '<cmd>FelixClip<CR>', { desc = 'paste from system clipboard' })
 vim.keymap.set({ 'n', 'v' }, '<C-y>', '"+y', { desc = 'copy to system clipboard' })
 
+vim.keymap.set('n', 'gF', ':vertical wincmd f<CR>', { desc = 'goto file in vsplit' })
+
 vim.keymap.set('n', '<F5>', '<cmd>w<bar>source %<CR>', { desc = 'execute current file' })
+
+-- fix quickfix <CR>
+-- https://superuser.com/a/815422
+vim.cmd([[
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
+]])
 
 -- highlight on search; clear when pressing <CR> in normal mode
 vim.opt.hlsearch = true
