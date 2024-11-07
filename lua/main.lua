@@ -27,7 +27,9 @@ set noswapfile  " disable swapfiles
 autocmd BufWritePost ~/LOG/*.md silent execute '!cd $(dirname %) && git status -s >/dev/null && git add $(basename %) && git commit -qm log -- $(basename %) >/dev/null'
 
 " https://vim.fandom.com/wiki/Dictionary_completions
-set dictionary+=/usr/share/dict/words
+if filereadable('/usr/share/dict/words')
+    set dictionary+=/usr/share/dict/words
+endif
 
 " spellcheck (since neovim 0.9)
 set spelllang=de_de,en_us
