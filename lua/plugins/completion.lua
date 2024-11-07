@@ -145,7 +145,7 @@ return {
 
     -- <C-x><C-k> for dictionary completion
     local words_file = '/usr/share/dict/words'
-    if vim.fn.filereadable(words_file) then
+    if vim.fn.filereadable(words_file) == 1 then
       require('cmp_dictionary').setup({
         paths = { words_file },
         exact_length = 2,
