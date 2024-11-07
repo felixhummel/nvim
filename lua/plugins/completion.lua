@@ -144,16 +144,19 @@ return {
     })
 
     -- <C-x><C-k> for dictionary completion
-    require('cmp_dictionary').setup({
-      paths = { '/usr/share/dict/words' },
-      exact_length = 2,
-      first_case_insensitive = true,
-      document = {
-        enable = true,
-        -- sudo apt install wordnet
-        command = { 'wn', '${label}', '-over' },
-      },
-    })
+    local words_file = '/usr/share/dict/words'
+    if vim.fn.filereadable(words_file) then
+      require('cmp_dictionary').setup({
+        paths = { words_file },
+        exact_length = 2,
+        first_case_insensitive = true,
+        document = {
+          enable = true,
+          -- sudo apt install wordnet
+          command = { 'wn', '${label}', '-over' },
+        },
+      })
+    end
     vim.api.nvim_set_keymap(
       'i',
       '<C-x><C-k>',
