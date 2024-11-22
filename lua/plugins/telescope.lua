@@ -47,41 +47,57 @@ return { -- Fuzzy Finder (files, lsp, etc)
     end
 
     local builtin = require('telescope.builtin')
-    vim.keymap.set('n', '<leader><leader>', builtin.live_grep, { desc = '  Find existing buffers' })
-    vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = 'Search Help' })
-    vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = 'Search Keymaps' })
-    vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'Search Files' })
-    vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = 'Search Select Telescope' })
-    vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'Search current Word' })
-    vim.keymap.set('n', '<leader>sb', builtin.buffers, { desc = 'Search by Grep' })
-    vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = 'Search Diagnostics' })
-    vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = 'Search Resume' })
-    vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = 'Search Recent Files ("." for repeat)' })
 
-    vim.keymap.set('n', '<C-f>', function()
-      builtin.find_files({ cwd = get_relevant_dir() })
-    end, { desc = 'Find files' })
-    vim.keymap.set('n', '<C-g>', function()
-      builtin.grep_string({ search_dirs = { get_relevant_dir() } })
-    end, { desc = 'Grep Dir' })
+    local function map(mode, lhs, desc, rhs)
+      vim.keymap.set(mode, lhs, rhs, { desc = desc })
+    end
+    local function nmap(lhs, desc, rhs)
+      map('n', lhs, desc, rhs)
+    end
 
-    vim.keymap.set('n', '<leader>/', function()
+    nmap('<leader><leader>', 'Find existing buffers', builtin.live_grep)
+    nmap('<leader>/h', 'Search Help', builtin.help_tags)
+    nmap('<leader>/k', 'Search Keymaps', builtin.keymaps)
+    nmap('<leader>/f', 'Search Files', builtin.find_files)
+    nmap('<leader>/s', 'Search Select Telescope', builtin.builtin)
+    map({ 'n', 'v' }, '<leader>/w', 'Search current Word', builtin.grep_string)
+    nmap('<leader>/b', 'Search by Grep', builtin.buffers)
+    nmap('<leader>/d', 'Search Diagnostics', builtin.diagnostics)
+    nmap('<leader>/r', 'Search Resume', builtin.resume)
+    nmap('<leader>/.', 'Search Recent Files ("." for repeat)', builtin.oldfiles)
+
+    nmap('<leader>//', '/ Fuzzily search in current buffer', function()
       builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
         winblend = 10,
         previewer = false,
       }))
-    end, { desc = '/ Fuzzily search in current buffer' })
+    end)
 
-    vim.keymap.set('n', '<leader>s/', function()
+    nmap('<leader>/g', 'Search / in Open Files', function()
       builtin.live_grep({
         grep_open_files = true,
         prompt_title = 'Live Grep in Open Files',
       })
-    end, { desc = 'Search / in Open Files' })
+    end)
 
     -- Shortcut for searching your Neovim configuration files
-    vim.keymap.set('n', '<leader>sn', function()
+    nmap('<leader>/v', 'Search Neovim files', function()
       builtin.find_files({ cwd = vim.fn.stdpath('config') })
-    end, { desc = 'Search Neovim files' })
+    end)
+
+    nmap('<C-f>', 'Find (grep)', function()
+      builtin.live_grep({ search_dirs = { get_relevant_dir() } })
+    end)
+    -- use visual selection by yanking to register v
+    map({ 'v' }, '<C-f>', 'Find (grep)', function()
+      vim.cmd.normal('"vy')
+      builtin.live_grep({
+        default_text = vim.fn.getreg('v'),
+        search_dirs = { get_relevant_dir() },
+      })
+    end)
+    nmap('<C-g>', 'Find files', function()
+      builtin.find_files({ cwd = get_relevant_dir() })
+    end)
   end,
 }
