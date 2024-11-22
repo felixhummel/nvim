@@ -39,11 +39,13 @@ return {
         lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
       }
     end,
+    -- https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
     formatters_by_ft = {
       lua = { 'stylua' },
       sql = { 'sleek' },
       python = { 'ruff' },
       css = { 'prettierd', 'prettier', stop_after_first = true },
+      terraform = { 'tofu_fmt' },
     },
     formatters = {
       sleek = {
