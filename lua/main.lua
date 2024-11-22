@@ -123,3 +123,9 @@ local old_school_vim_scripts = vim.fn.glob(old_school_vim_scripts_glob, true, tr
 for _, file in ipairs(old_school_vim_scripts) do
   vim.cmd('source ' .. file)
 end
+
+-- enable fuzzy completion for nvim 0.11
+-- https://www.reddit.com/r/neovim/comments/1fad1hm/comment/llscn3q/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+if vim.fn.has('nvim-0.11') == 1 then
+  vim.opt.completeopt:append('fuzzy')
+end
