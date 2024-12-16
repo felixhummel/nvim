@@ -23,6 +23,22 @@ return {
       set_vim_settings = true,
     })
 
-    require('config.statusline')
+    local statusline = require('mini.statusline')
+
+    statusline.setup({
+      use_icons = vim.g.have_nerd_font,
+    })
+
+    -- set the section for cursor location to LINE:COLUMN
+    ---@diagnostic disable-next-line: duplicate-set-field
+    statusline.section_location = function()
+      return '%2l:%-2v'
+    end
+
+    -- i'll leave statusline.section_git (showing branch / head ref) for now
+
+    -- disable diff summary (too much noise for me)
+    ---@diagnostic disable-next-line: duplicate-set-field
+    statusline.section_diff = function() end
   end,
 }
