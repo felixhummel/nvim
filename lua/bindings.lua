@@ -27,3 +27,8 @@ map <F10> :NvimTreeFocus<CR>
 nmap <M-Up> :m.-2<CR>
 nmap <M-Down> :m.+1<CR>
 ]])
+
+-- https://youtu.be/CuWfgiwI73Q?t=1343
+vim.keymap.set('n', '<space><space>x', '<cmd>source %<CR>')
+vim.keymap.set('n', '<space>x', ':.lua<CR>')
+vim.keymap.set('v', '<space>x', ':lua<CR>')
