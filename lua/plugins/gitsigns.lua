@@ -30,10 +30,10 @@ return {
       -- Actions
       -- Borrowed from https://github.com/exosyphon/nvim/blob/main/lua/plugins.lua
       -- visual mode
-      map('v', '<leader>gs', function()
+      map('v', '<leader>hs', function()
         gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
       end, { desc = 'stage git hunk' })
-      map('v', '<leader>gr', function()
+      map('v', '<leader>hr', function()
         gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
       end, { desc = 'reset git hunk' })
       -- normal mode
@@ -49,8 +49,8 @@ return {
         gitsigns.diffthis('@')
       end, { desc = 'git [D]iff against last commit' })
       -- Toggles
-      map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
-      map('n', '<leader>tD', gitsigns.toggle_deleted, { desc = '[T]oggle git show [D]eleted' })
+      map('n', '<leader>gtb', gitsigns.toggle_current_line_blame, { desc = '[T]oggle git show [b]lame line' })
+      map('n', '<leader>gtD', gitsigns.toggle_deleted, { desc = '[T]oggle git show [D]eleted' })
     end,
   },
 }

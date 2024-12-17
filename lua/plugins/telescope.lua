@@ -13,6 +13,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     },
     { 'nvim-telescope/telescope-ui-select.nvim' },
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+    { 'benfowler/telescope-luasnip.nvim' },
   },
   config = function()
     local actions = require('telescope.actions')
@@ -33,8 +34,10 @@ return { -- Fuzzy Finder (files, lsp, etc)
         },
       },
     })
+    -- note: pcall returns error code instead of propagating. In this case: ignore errors.
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
+    pcall(require('telescope').load_extension('luasnip'))
 
     ---@return string # Oil's current directory. Fall back to cwd.
     local function get_relevant_dir()
@@ -56,15 +59,15 @@ return { -- Fuzzy Finder (files, lsp, etc)
     end
 
     nmap('<leader><leader>', 'Find existing buffers', builtin.live_grep)
-    nmap('<leader>/h', 'Search Help', builtin.help_tags)
-    nmap('<leader>/k', 'Search Keymaps', builtin.keymaps)
-    nmap('<leader>/f', 'Search Files', builtin.find_files)
-    nmap('<leader>/s', 'Search Select Telescope', builtin.builtin)
-    map({ 'n', 'v' }, '<leader>/w', 'Search current Word', builtin.grep_string)
-    nmap('<leader>/b', 'Search by Grep', builtin.buffers)
-    nmap('<leader>/d', 'Search Diagnostics', builtin.diagnostics)
-    nmap('<leader>/r', 'Search Resume', builtin.resume)
-    nmap('<leader>/.', 'Search Recent Files ("." for repeat)', builtin.oldfiles)
+    nmap('<leader>/h', 'Help', builtin.help_tags)
+    nmap('<leader>/k', 'Keymaps', builtin.keymaps)
+    nmap('<leader>/f', 'Files', builtin.find_files)
+    nmap('<leader>/s', 'Snippets', require('telescope').extensions.luasnip.luasnip)
+    map({ 'n', 'v' }, '</w', 'Search current Word', builtin.grep_string)
+    nmap('<leader>/b', 'by Grep', builtin.buffers)
+    nmap('<leader>/d', 'Diagnostics', builtin.diagnostics)
+    nmap('<leader>/r', 'Resume', builtin.resume)
+    nmap('<leader>/.', 'Recent Files ("." for repeat)', builtin.oldfiles)
 
     nmap('<leader>//', '/ Fuzzily search in current buffer', function()
       builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({

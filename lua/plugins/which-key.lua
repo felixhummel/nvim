@@ -12,7 +12,6 @@ return { -- Useful plugin to show you pending keybinds.
       { '<leader>h', group = 'Help' },
       { '<leader>r', group = 'Rename' },
       { '<leader>/', group = 'Search' },
-      { '<leader>t', group = 'Toggle' },
       { '<leader>w', group = 'Workspace' },
       { '<leader>v', group = 'Vim' },
     })
