@@ -46,8 +46,13 @@ return {
       python = { 'ruff_format' },
       css = { 'prettierd', 'prettier', stop_after_first = true },
       terraform = { 'tofu_fmt' },
+      caddyfile = { 'caddy_fmt' },
     },
     formatters = {
+      caddy_fmt = {
+        command = 'caddy',
+        args = { 'fmt', '$FILENAME' },
+      },
       sleek = {
         command = 'sleek',
         args = '--indent-spaces=2 --lines-between-queries=3',
