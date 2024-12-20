@@ -51,7 +51,10 @@ return {
     formatters = {
       caddy_fmt = {
         command = 'caddy',
-        args = { 'fmt', '$FILENAME' },
+        -- When false, will create a temp file (will appear in "$FILENAME" args). The temp
+        -- file is assumed to be modified in-place by the format command.
+        stdin = false,
+        args = { 'fmt', '--overwrite', '$FILENAME' },
       },
       sleek = {
         command = 'sleek',
