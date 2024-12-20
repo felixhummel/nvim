@@ -100,7 +100,10 @@ return { -- Fuzzy Finder (files, lsp, etc)
       })
     end)
     nmap('<C-g>', 'Find files', function()
-      builtin.find_files({ cwd = get_relevant_dir() })
+      builtin.find_files({
+        cwd = get_relevant_dir(),
+        hidden = true,
+      })
     end)
   end,
 }
