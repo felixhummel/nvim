@@ -29,6 +29,17 @@ return {
       use_icons = vim.g.have_nerd_font,
     })
 
+    ---@diagnostic disable-next-line: duplicate-set-field
+    statusline.section_filename = function()
+      if vim.bo.buftype == 'terminal' then
+        return '%t'
+      else
+        -- MiniStatusline.section_filename uses fullpath if not truncated
+        -- I always want the relative path.
+        -- see also :help 'statusline' and search for "meaning"
+        return '%f%m%r'
+      end
+    end
     -- set the section for cursor location to LINE:COLUMN
     ---@diagnostic disable-next-line: duplicate-set-field
     statusline.section_location = function()
