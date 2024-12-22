@@ -66,15 +66,8 @@ return { -- Fuzzy Finder (files, lsp, etc)
     map({ 'n', 'v' }, '<leader>/w', 'grep_string', builtin.grep_string)
     nmap('<leader>/b', 'buffers', builtin.buffers)
     nmap('<leader>/d', 'diagnostics', builtin.diagnostics)
-    nmap('<leader>/r', 'resume', builtin.resume)
+    nmap('<leader>//', 'resume last search', builtin.resume)
     nmap('<leader>/.', 'oldfiles', builtin.oldfiles)
-
-    nmap('<leader>//', '/ Fuzzily search in current buffer', function()
-      builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
-        winblend = 10,
-        previewer = false,
-      }))
-    end)
 
     nmap('<leader>/g', 'Search / in Open Files', function()
       builtin.live_grep({
