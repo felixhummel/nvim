@@ -1,3 +1,7 @@
 snippet ifmain
 	if __name__ == '__main__':
 		$0
+
+snippet slog
+	import structlog
+	log = structlog.get_logger()
