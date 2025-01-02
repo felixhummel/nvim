@@ -7,6 +7,7 @@ return { -- Useful plugin to show you pending keybinds.
 
     -- normal
     which_key.add({
+      { '<leader>a', group = 'AI \\o/' },
       { '<leader>c', group = 'Code', mode = { 'n', 'x' } },
       { '<leader>d', group = 'Document' },
       { '<leader>h', group = 'Help' },
