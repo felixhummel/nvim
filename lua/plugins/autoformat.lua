@@ -41,6 +41,7 @@ return {
     end,
     -- https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
     formatters_by_ft = {
+      sh = { 'shfmt' },
       lua = { 'stylua' },
       sql = { 'sleek' },
       python = { 'ruff_format' },
@@ -62,6 +63,10 @@ return {
       },
       sqlfluff = {
         args = { 'format', '--dialect=duckdb', '-' },
+      },
+      -- https://github.com/mvdan/sh/blob/master/cmd/shfmt/shfmt.1.scd
+      shfmt = {
+        prepend_args = { '--space-redirects', '--indent', '2' },
       },
     },
   },
