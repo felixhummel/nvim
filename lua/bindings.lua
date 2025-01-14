@@ -32,3 +32,5 @@ nmap <M-Down> :m.+1<CR>
 vim.keymap.set('n', '<space><space>x', '<cmd>source %<CR>')
 vim.keymap.set('n', '<space>x', ':.lua<CR>')
 vim.keymap.set('v', '<space>x', ':lua<CR>')
+
+vim.keymap.set('n', '<leader>cs', '<cmd>AerialToggle!<CR>', { desc = 'Structure (AerialToggle)' })
