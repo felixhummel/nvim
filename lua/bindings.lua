@@ -34,3 +34,5 @@ vim.keymap.set('n', '<space>x', ':.lua<CR>')
 vim.keymap.set('v', '<space>x', ':lua<CR>')
 
 vim.keymap.set('n', '<leader>cs', '<cmd>AerialToggle!<CR>', { desc = 'Structure (AerialToggle)' })
+
+vim.keymap.set('n', '<leader>o', '<cmd>Oil<CR>', { desc = 'Oil' })
