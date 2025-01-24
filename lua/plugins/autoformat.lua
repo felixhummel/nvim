@@ -48,6 +48,7 @@ return {
       css = { 'prettierd', 'prettier', stop_after_first = true },
       terraform = { 'tofu_fmt' },
       caddyfile = { 'caddy_fmt' },
+      go = { 'gofmt' },
     },
     formatters = {
       caddy_fmt = {
