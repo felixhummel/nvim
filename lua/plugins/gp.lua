@@ -7,9 +7,13 @@ return {
       }
       require('gp').setup(conf)
 
-      -- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
-      vim.keymap.set({ 'n', 'v' }, '<leader>asd', '<cmd>GpWhisper de<CR>', { desc = 'GpWhisper de' })
-      vim.keymap.set({ 'n', 'v' }, '<leader>ase', '<cmd>GpWhisper en<CR>', { desc = 'GpWhisper en' })
+      -- map lhs to cmd with desc = cmd
+      local function map_cmd(lhs, cmd)
+        vim.keymap.set({ 'n', 'v' }, lhs, '<cmd>' .. cmd .. '<CR>', { desc = cmd })
+      end
+      map_cmd('<leader>ac', 'GpChatPaste vsplit')
+      map_cmd('<leader>asd', 'GpWhisper de')
+      map_cmd('<leader>ase', 'GpWhisper en')
     end,
   },
 }
