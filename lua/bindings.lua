@@ -1,5 +1,6 @@
 vim.keymap.set('n', '<C-p>', '<cmd>FelixClip<CR>', { desc = 'paste from system clipboard' })
-vim.keymap.set({ 'n', 'v' }, '<C-y>', '"+y', { desc = 'copy to system clipboard' })
+vim.keymap.set({ 'n' }, '<C-y>', 'V"+y', { desc = 'copy line to system clipboard' })
+vim.keymap.set({ 'v' }, '<C-y>', '"+y', { desc = 'copy selection to system clipboard' })
 
 vim.keymap.set('n', 'gF', ':vertical wincmd f<CR>', { desc = 'goto file in vsplit' })
 
