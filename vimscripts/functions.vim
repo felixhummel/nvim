@@ -11,3 +11,10 @@ function! StripTrailingWhitespace() range
     echo "Stripped trailing whitespace"
 endfunction
 command -range=% StripTrailingWhitespace :<line1>,<line2>call StripTrailingWhitespace()
+
+
+" https://codegoalie.com/posts/format-json-nvim-jq/
+function! FelixFormatJSON()
+    :%!jq .
+endfunction
+command FelixFormatJSON call FelixFormatJSON()
