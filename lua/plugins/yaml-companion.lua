@@ -8,15 +8,15 @@ return {
     },
     config = function()
       require('telescope').load_extension('yaml_schema')
-      -- local cfg = require('yaml-companion').setup({
-      --   schemas = {
-      --     {
-      --       name = 'Kustomization',
-      --       uri = 'http://json.schemastore.org/kustomization',
-      --     },
-      --   },
-      -- })
-      -- require('lspconfig')['yamlls'].setup(cfg)
+      local cfg = require('yaml-companion').setup({
+        schemas = {
+          {
+            name = 'Gitlab CI',
+            uri = 'https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json',
+          },
+        },
+      })
+      require('lspconfig')['yamlls'].setup(cfg)
     end,
   },
 }
