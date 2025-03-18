@@ -25,6 +25,8 @@ return { -- Fuzzy Finder (files, lsp, etc)
             -- close telescope window on <ESC> (instead of going into normal mode)
             -- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#mapping-esc-to-quit-in-insert-mode
             ['<Esc>'] = actions.close,
+            -- clear current prompt
+            ['<C-u>'] = false,
           },
         },
       },
