@@ -83,17 +83,26 @@ return { -- Fuzzy Finder (files, lsp, etc)
       builtin.find_files({ cwd = vim.fn.stdpath('config') })
     end)
 
+    local function _grep_or_resume(grep_opts)
+      local cached_pickers = require('telescope.state').get_global_key('cached_pickers')
+      if cached_pickers == nil or vim.tbl_isempty(cached_pickers) then
+        builtin.live_grep(grep_opts)
+      else
+        builtin.resume()
+      end
+    end
     nmap('<C-f>', 'Find (grep)', function()
-      builtin.live_grep({ search_dirs = { get_relevant_dir() } })
+      _grep_or_resume({ search_dirs = { get_relevant_dir() } })
     end)
     -- use visual selection by yanking to register v
     map({ 'v' }, '<C-f>', 'Find (grep)', function()
       vim.cmd.normal('"vy')
-      builtin.live_grep({
+      _grep_or_resume({
         default_text = vim.fn.getreg('v'),
         search_dirs = { get_relevant_dir() },
       })
     end)
+
     nmap('<C-g>', 'Find files', function()
       builtin.find_files({
         cwd = get_relevant_dir(),
