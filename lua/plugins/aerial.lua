@@ -1,3 +1,4 @@
+-- code structure aka. class explorer
 return {
   {
     'stevearc/aerial.nvim',

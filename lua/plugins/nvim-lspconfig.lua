@@ -7,6 +7,7 @@ return {
     'zapling/mason-lock.nvim',
     { 'j-hui/fidget.nvim', opts = {} },
 
+    -- TODO: use https://github.com/folke/lazydev.nvim instead of neodev
     -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
     { 'folke/neodev.nvim', opts = {} },
