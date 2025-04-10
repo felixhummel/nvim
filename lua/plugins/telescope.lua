@@ -14,6 +14,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     { 'nvim-telescope/telescope-ui-select.nvim' },
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     { 'benfowler/telescope-luasnip.nvim' },
+    'debugloop/telescope-undo.nvim',
   },
   config = function()
     local actions = require('telescope.actions')
@@ -34,12 +35,16 @@ return { -- Fuzzy Finder (files, lsp, etc)
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
         },
+        undo = {
+          -- https://github.com/debugloop/telescope-undo.nvim
+        },
       },
     })
     -- note: pcall returns error code instead of propagating. In this case: ignore errors.
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
-    pcall(require('telescope').load_extension('luasnip'))
+    pcall(require('telescope').load_extension, 'luasnip')
+    pcall(require('telescope').load_extension, 'undo')
 
     ---@return string # Oil's current directory. Fall back to cwd.
     local function get_relevant_dir()
