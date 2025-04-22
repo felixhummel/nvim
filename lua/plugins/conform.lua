@@ -76,14 +76,15 @@ return {
     end,
     -- https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
     formatters_by_ft = {
-      sh = { 'shfmt' },
-      lua = { 'stylua' },
-      sql = { 'sleek' },
-      python = { 'ruff_format' },
-      css = { 'prettierd', 'prettier', stop_after_first = true },
-      terraform = { 'tofu_fmt' },
       caddyfile = { 'caddy_fmt' },
+      css = { 'prettierd', 'prettier', stop_after_first = true },
       go = { 'gofmt' },
+      hcl = { 'hcl' },
+      lua = { 'stylua' },
+      python = { 'ruff_format' },
+      sh = { 'shfmt' },
+      sql = { 'sleek' },
+      terraform = { 'tofu_fmt' },
     },
     formatters = {
       caddy_fmt = {

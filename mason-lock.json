@@ -1,17 +1,18 @@
 {
   "astro-language-server": "2.15.4",
-  "basedpyright": "1.28.4",
   "bash-language-server": "5.4.3",
   "biome": "1.9.4",
   "docker-compose-language-service": "0.3.0",
   "gopls": "v0.18.1",
+  "hclfmt": "v2.23.0",
   "intelephense": "1.14.3",
-  "lua-language-server": "3.13.5",
-  "rust-analyzer": "2024-12-30",
-  "stylua": "v2.0.2",
+  "lua-language-server": "3.14.0",
+  "rust-analyzer": "2025-04-21",
+  "stylua": "v2.1.0",
   "taplo": "0.9.3",
   "terraform-ls": "v0.36.4",
-  "typescript-language-server": "4.3.3",
+  "typescript-language-server": "4.3.4",
   "xmlformatter": "0.2.8",
-  "yaml-language-server": "1.16.0"
+  "yaml-language-server": "1.16.0",
+
 }
