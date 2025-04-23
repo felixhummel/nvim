@@ -17,11 +17,8 @@ return {
     -- - sr)'  - [S]urround [R]eplace [)] [']
     require('mini.surround').setup()
 
-    require('mini.completion').setup({
-      -- don't mess with my 'shortmess' or 'completeopt'
-      -- shortmess=CFToctlO
-      set_vim_settings = true,
-    })
+    require('mini.icons').setup()
+    require('mini.completion').setup()
 
     local statusline = require('mini.statusline')
 

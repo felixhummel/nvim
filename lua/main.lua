@@ -10,7 +10,7 @@ vim.opt.guicursor = ''
 vim.opt.wildmode = 'longest:full'
 
 -- see plugins/completion.lua too
-vim.opt.completeopt = 'longest,menuone,noselect'
+vim.opt.completeopt = 'longest,menuone,noselect,noinsert,fuzzy'
 vim.opt.mouse = '' -- disable mouse
 
 vim.opt.laststatus = 2
