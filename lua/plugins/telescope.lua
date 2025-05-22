@@ -28,6 +28,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
             ['<Esc>'] = actions.close,
             -- clear current prompt
             ['<C-u>'] = false,
+            ['<C-q>'] = actions.send_to_qflist,
           },
         },
       },
