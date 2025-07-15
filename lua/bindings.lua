@@ -27,6 +27,16 @@ map <F10> :NvimTreeFocus<CR>
 " move lines with alt+up/down
 nmap <M-Up> :m.-2<CR>
 nmap <M-Down> :m.+1<CR>
+
+" uses mini.surround
+vmap ` sa`
+vmap ' sa'
+vmap ] sa]
+vmap ~ 2sa~
+
+" surround code block, e.g. Vjj\`
+vmap <leader>` c```<CR>```<ESC>P
+
 ]])
 
 -- https://youtu.be/CuWfgiwI73Q?t=1343
