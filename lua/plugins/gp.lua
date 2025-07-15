@@ -12,6 +12,9 @@ return {
         vim.keymap.set({ 'n', 'v' }, lhs, '<cmd>' .. cmd .. '<CR>', { desc = cmd })
       end
       map_cmd('<leader>ac', 'GpChatPaste vsplit')
+      map_cmd('<leader>af', 'GpChatFinder')
+      map_cmd('<leader>av', 'GpChatNew vsplit')
+      map_cmd('<leader>an', 'GpChatNew')
       map_cmd('<leader>asd', 'GpWhisper de')
       map_cmd('<leader>ase', 'GpWhisper en')
     end,
