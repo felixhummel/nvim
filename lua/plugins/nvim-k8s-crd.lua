@@ -1,6 +1,7 @@
 return {
   {
     'anasinnyk/nvim-k8s-crd',
+    enabled = false,
     event = { 'BufEnter *.yaml' },
     dependencies = { 'neovim/nvim-lspconfig' },
     opts = {
