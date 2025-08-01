@@ -11,6 +11,10 @@ vim.opt.wildmode = 'longest:full'
 
 -- see plugins/completion.lua too
 vim.opt.completeopt = 'longest,menuone,noselect,noinsert,fuzzy'
+
+-- equal sign is not part of filename, but often used in flags like --foo=/some/path
+vim.opt.isfname:remove('=')
+
 vim.opt.mouse = '' -- disable mouse
 
 vim.opt.laststatus = 2
