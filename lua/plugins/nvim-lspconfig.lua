@@ -10,7 +10,18 @@ return {
     -- TODO: use https://github.com/folke/lazydev.nvim instead of neodev
     -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
     -- used for completion, annotations and signatures of Neovim apis
-    { 'folke/neodev.nvim', opts = {} },
+    {
+      'folke/lazydev.nvim',
+      ft = 'lua',
+      dependencies = {
+        { 'gonstoll/wezterm-types', lazy = true },
+      },
+      opts = {
+        library = {
+          { path = 'wezterm-types', mods = { 'wezterm' } },
+        },
+      },
+    },
   },
   opts = {
     inlay_hints = { enabled = true },
