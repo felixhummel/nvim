@@ -76,6 +76,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     nmap('<leader>/d', 'diagnostics', builtin.diagnostics)
     nmap('<leader>//', 'resume last search', builtin.resume)
     nmap('<leader>/.', 'oldfiles', builtin.oldfiles)
+    nmap('<leader>/:', 'command_history', builtin['command_history'])
 
     nmap('<leader>/g', 'Search / in Open Files', function()
       builtin.live_grep({
@@ -112,6 +113,13 @@ return { -- Fuzzy Finder (files, lsp, etc)
     nmap('<C-g>', 'Find files', function()
       builtin.find_files({
         cwd = get_relevant_dir(),
+        hidden = true,
+      })
+    end)
+
+    nmap('<C-M-f>', 'Find files in $HOME', function()
+      builtin.find_files({
+        cwd = vim.fn.expand('$HOME'),
         hidden = true,
       })
     end)
