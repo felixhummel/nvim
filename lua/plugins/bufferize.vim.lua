@@ -2,6 +2,9 @@
 return {
   {
     'AndrewRadev/bufferize.vim',
-    opts = {},
+    cmd = {
+      'Bufferize',
+    },
+    config = function() end,
   },
 }
