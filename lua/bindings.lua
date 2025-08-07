@@ -18,7 +18,7 @@ autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 
 -- highlight on search; clear when pressing <CR> in normal mode
 vim.opt.hlsearch = true
-vim.keymap.set('n', '<CR>', 'nohlsearch')
+map_cmd('n', '<CR>', 'nohlsearch')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<M-Left>', vim.diagnostic.goto_prev, { desc = 'Go to previous Diagnostic message' })
