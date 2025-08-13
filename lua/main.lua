@@ -37,6 +37,7 @@ set spellcapcheck=
 vim.g.mapleader = '\\'
 vim.g.maplocalleader = '\\'
 require('bindings')
+require('execute')
 
 -- nvim-tree wants us to disable netrw
 vim.g.loaded_netrw = 1
