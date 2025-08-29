@@ -12,7 +12,7 @@ return {
       desc = '[F]ormat buffer',
     },
     {
-      '<M-S-l>', -- muscle memory (pycharm)
+      '<M-L>', -- muscle memory (pycharm)
       function()
         require('conform').format({ async = true, lsp_fallback = true })
       end,
