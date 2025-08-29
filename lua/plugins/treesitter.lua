@@ -32,6 +32,8 @@ return {
             ['if'] = { query = '@function.inner', desc = 'function.inner' },
             ['ac'] = { query = '@class.outer', desc = 'class.outer' },
             ['ic'] = { query = '@class.inner', desc = 'class.inner' },
+            ['at'] = { query = '@table_constructor.outer', desc = 'table_constructor.outer' },
+            ['it'] = { query = '@table_constructor.inner', desc = 'table_constructor.inner' },
             ['as'] = { query = '@scope', query_group = 'locals', desc = 'Select language scope' },
           },
           selection_modes = {

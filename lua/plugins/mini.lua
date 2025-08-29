@@ -1,5 +1,9 @@
 return {
   'echasnovski/mini.nvim',
+  -- treesitter textobjects first
+  dependencies = {
+    'nvim-treesitter/nvim-treesitter-textobjects',
+  },
   config = function()
     -- :help MiniAi-textobject-builtin
     -- to list textobjects
@@ -8,7 +12,13 @@ return {
     --  - va)  - [V]isually select [A]round [)]paren
     --  - yinq - [Y]ank [I]nside [N]ext [']quote
     --  - ci'  - [C]hange [I]nside [']quote
-    require('mini.ai').setup({ n_lines = 500 })
+    local spec_treesitter = require('mini.ai').gen_spec.treesitter
+    require('mini.ai').setup({
+      n_lines = 500,
+      custom_textobjects = {
+        t = spec_treesitter({ a = '@table_constructor.outer', i = '@table_constructor.inner' }),
+      },
+    })
 
     -- Add/delete/replace surroundings (brackets, quotes, etc.)
     --
