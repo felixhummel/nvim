@@ -81,6 +81,7 @@ return {
       go = { 'gofmt' },
       hcl = { 'hcl' },
       lua = { 'stylua' },
+      json = { 'deno_fmt' },
       python = { 'ruff_format' },
       sh = { 'shfmt' },
       sql = { 'sleek' },
