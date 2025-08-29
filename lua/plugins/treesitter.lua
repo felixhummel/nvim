@@ -15,6 +15,10 @@ return {
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
         additional_vim_regex_highlighting = { 'ruby' },
+        custom_captures = {
+          ['function.diff'] = 'FelixDiffFileHighlight',
+          ['variable.parameter.diff'] = 'FelixDiffFileHighlight',
+        },
       },
       indent = {
         enable = true,
@@ -51,6 +55,22 @@ return {
     config = function(_, opts)
       require('nvim-treesitter.configs').setup(opts)
 
+      -- git commit preview with higher visibility for files
+      -- Use `:Inspect` to show node under cursor.
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'gitcommit',
+        callback = function()
+          -- Define the custom highlight group
+          vim.api.nvim_set_hl(0, 'FelixDiffFileHighlight', {
+            fg = '#000000',
+            bg = '#FF00FF',
+            bold = true,
+          })
+          vim.api.nvim_set_hl(0, '@function.diff', { link = 'FelixDiffFileHighlight' })
+          vim.api.nvim_set_hl(0, '@variable.parameter.diff', { link = 'FelixDiffFileHighlight' })
+          -- vim.api.nvim_set_hl(0, '@string.special.path.diff', { link = 'FelixDiffFileHighlight' })
+        end,
+      })
       -- maybe
       --
       -- - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
