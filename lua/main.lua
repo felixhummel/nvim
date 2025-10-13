@@ -9,6 +9,10 @@ vim.opt.guicursor = ''
 -- https://www.reddit.com/r/neovim/comments/10rsl92/comment/j6xc38q/
 vim.opt.wildmode = 'longest:full'
 
+-- Remove '=' from the list of characters considered part of a filename
+-- to allow completion of ExecStart=/foo/bar (systemd) or MY_VAR=/some/path
+vim.opt.isfname:remove('=')
+
 -- see plugins/completion.lua too
 vim.opt.completeopt = 'longest,menuone,noselect,noinsert,fuzzy'
 
