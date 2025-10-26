@@ -84,8 +84,11 @@ return {
       json = { 'deno_fmt' },
       python = { 'ruff_format' },
       sh = { 'shfmt' },
-      sql = { 'sleek' },
+      -- sql = { 'sleek' },
       terraform = { 'tofu_fmt' },
+      javascript = { 'prettierd' },
+      typescript = { 'prettierd' },
+      typescriptreact = { 'prettierd' },
     },
     formatters = {
       caddy_fmt = {
