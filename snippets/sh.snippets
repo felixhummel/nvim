@@ -7,6 +7,9 @@ snippet set
 	$0
 
 
+snippet log
+	log() { echo "$@" 2>&1; }
+
 snippet args arguments as array
 	args=(
 	  $1
