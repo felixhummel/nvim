@@ -77,19 +77,19 @@ return {
     -- https://github.com/stevearc/conform.nvim?tab=readme-ov-file#formatters
     formatters_by_ft = {
       caddyfile = { 'caddy_fmt' },
-      css = { 'prettierd', 'prettier', stop_after_first = true },
+      css = { 'dprint', 'dprint', stop_after_first = true },
       go = { 'gofmt' },
       hcl = { 'hcl' },
-      javascript = { 'prettierd' },
+      javascript = { 'dprint' },
       json = { 'deno_fmt' },
       lua = { 'stylua' },
       python = { 'ruff_format' },
       sh = { 'shfmt' },
       -- sql = { 'sleek' },
       terraform = { 'tofu_fmt' },
-      typescript = { 'prettierd' },
-      typescriptreact = { 'prettierd' },
-      yaml = { 'prettierd' },
+      typescript = { 'dprint' },
+      typescriptreact = { 'dprint' },
+      yaml = { 'dprint' },
     },
     formatters = {
       caddy_fmt = {
@@ -109,6 +109,13 @@ return {
       -- https://github.com/mvdan/sh/blob/master/cmd/shfmt/shfmt.1.scd
       shfmt = {
         prepend_args = { '--space-redirects', '--indent', '2' },
+      },
+      -- https://www.lazyvim.org/plugins/formatting
+      dprint = {
+        condition = function(ctx)
+          -- "not not" casts to bool
+          return not not vim.fs.find({ 'dprint.json', 'dprint.jsonc', '.dprint.json', '.dprint.jsonc' }, { path = ctx.filename, upward = true })[1]
+        end,
       },
     },
   },

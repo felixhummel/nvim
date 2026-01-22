@@ -6,10 +6,6 @@ return {
     'williamboman/mason-lspconfig.nvim',
     'zapling/mason-lock.nvim',
     { 'j-hui/fidget.nvim', opts = {} },
-
-    -- TODO: use https://github.com/folke/lazydev.nvim instead of neodev
-    -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-    -- used for completion, annotations and signatures of Neovim apis
     {
       'folke/lazydev.nvim',
       ft = 'lua',
@@ -148,7 +144,7 @@ return {
       },
     })
 
-    require('lspconfig').helm_ls.setup({
+    vim.lsp.config['helm_ls'] = {
       settings = {
         ['helm-ls'] = {
           yamlls = {
@@ -156,8 +152,10 @@ return {
           },
         },
       },
-    })
+    }
+    vim.lsp.enable('helm_ls')
 
-    require('lspconfig').gleam.setup({})
+    vim.lsp.enable('dprint')
+    vim.lsp.enable('gleam')
   end,
 }
