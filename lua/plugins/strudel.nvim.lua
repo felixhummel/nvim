@@ -1,5 +1,6 @@
 return {
   {
+    enabled = false,
     'gruvw/strudel.nvim',
     build = 'pnpm install',
     config = function()
