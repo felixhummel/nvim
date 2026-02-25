@@ -49,5 +49,11 @@ map_cmd('v', '<space>x', 'lua')
 
 map_cmd('n', '<leader>cs', 'AerialToggle!', 'Structure (AerialToggle)')
 
+-- link for word under cursor or visual selection
+vim.cmd([[
+nmap <C-k> ciw[<C-r>"]()<Left>
+vmap <C-k> c[<C-r>"]()<Left>
+]])
+
 map_cmd('n', '<leader>o', 'Oil')
 map_cmd('n', '<leader>DD', '<cmd>DBUI')
