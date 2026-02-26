@@ -118,6 +118,10 @@ return {
           },
         },
       },
+      ts_ls = {},
+      vue_ls = {
+        enabled = false,
+      },
     }
 
     -- :Mason
@@ -157,5 +161,23 @@ return {
 
     vim.lsp.enable('dprint')
     vim.lsp.enable('gleam')
+
+    -- use bun instead of node to run lsps
+    -- https://github.com/mason-org/mason.nvim/discussions/1031
+    local util = require('lspconfig.util')
+
+    local function prefix_bun(cmd)
+      return vim.list_extend({
+        'bun',
+        'run',
+        '--bun',
+      }, cmd)
+    end
+
+    util.on_setup = util.add_hook_before(util.on_setup, function(config, user_config)
+      if config.cmd and is_node_server(config.name) then
+        config.cmd = prefix_bun(config.cmd)
+      end
+    end)
   end,
 }
