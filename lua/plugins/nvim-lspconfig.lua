@@ -23,9 +23,7 @@ return {
     inlay_hints = { enabled = true },
   },
   config = function()
-    -- :help lsp-vs-treesitter
-
-    -- when an LSP attaches to a particular buffer:
+    -- when an LSP attaches to a buffer
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
@@ -87,26 +85,14 @@ return {
       end,
     })
 
-    -- LSP servers and clients are able to communicate to each other what features they support.
-    --  By default, Neovim doesn't support everything that is in the LSP specification.
-    --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
-    --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-    -- capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-    -- local capabilities = {}
-    --  Add any additional override configuration in the following tables. Available keys are:
-    --  - cmd (table): Override the default command used to start the server
-    --  - filetypes (table): Override the default list of associated filetypes for the server
-    --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-    --  - settings (table): Override the default settings passed when initializing the server.
-    --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
+      -- `:help lspconfig-all` for a list of all the pre-configured LSPs
       basedpyright = {},
       -- This language service will emit VS Code-specific telemetry events. If using the service outside of VS Code (e.g. in Vim), these telemetry events can be safely ignored.
       -- https://github.com/microsoft/compose-language-service#telemetry
       -- The following must be set for docker compose files: filetype=yaml.docker-compose
       docker_compose_language_service = {},
-      -- `:help lspconfig-all` for a list of all the pre-configured LSPs
       lua_ls = {
         settings = {
           Lua = {
@@ -126,6 +112,8 @@ return {
 
     -- :Mason
     require('mason').setup()
+    -- we can use Mason to test for language server installation
+    local registry = require('mason-registry')
 
     -- :MasonLock
     -- :MasonLockRestore
@@ -165,7 +153,6 @@ return {
     -- :MasonInstall vue-language-server
     -- https://github.com/vuejs/language-tools/wiki/Neovim
     local vue_language_server_path = vim.fn.stdpath('data') .. '/mason/packages/vue-language-server/node_modules/@vue/language-server'
-    local registry = require('mason-registry')
     local ok, pkg = pcall(registry.get_package, 'vue-language-server')
     if ok and pkg:is_installed() then
       local tsserver_filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }
