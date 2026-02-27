@@ -1,11 +1,9 @@
-based on https://github.com/nvim-lua/kickstart.nvim
+# MOVED
+https://codeberg.org/felixhummel/nvim
 
-Quickstart
 ```
-git clone git@github.com:felixhummel/nvim.git ~/.config/nvim
-nvim  # let lazy do its job, then q:q
-nvim
+git remote set-url origin https://codeberg.org/felixhummel/nvim.git
+git fetch
+git checkout main
+git reset --hard origin/main
 ```
-
-# Learnings
-See https://blag.felixhummel.de/vim/index.html
