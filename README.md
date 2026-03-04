@@ -1,8 +1,8 @@
 # MOVED
-https://codeberg.org/felixhummel/nvim
+https://forge.felixhummel.de/felix/nvim
 
 ```
-git remote set-url origin https://codeberg.org/felixhummel/nvim.git
+git remote set-url origin https://forge.felixhummel.de/felix/nvim.git
 git fetch
 git checkout main
 git reset --hard origin/main
